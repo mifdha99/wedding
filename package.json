@@ -1,5 +1,5 @@
 {
-  "name": "wedding",
+  "name": "wedding-invitation-generator",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
