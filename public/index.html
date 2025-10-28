@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Undangan Pernikahan Generator</h1>
+    <form id="invitationForm">
+      <input type="text" id="bride" placeholder="Nama Wanita" required>
+      <input type="text" id="groom" placeholder="Nama Pria" required>
+      <input type="date" id="date" required>
+      <input type="file" id="photo" accept="image/*" required>
+      <button type="submit">Buat Undangan</button>
+    </form>
+
+    <div id="preview" class="hidden">
+      <h2 id="names"></h2>
+      <p id="weddingDate"></p>
+      <img id="previewImage" src="" alt="Foto Bersama">
+      <a id="whatsappBtn" href="#" target="_blank">Bagikan ke WhatsApp</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
