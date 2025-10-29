@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIE TIP TOP - Lezat, Cepat, Bikin Nagih!</title>
+    
+    <!-- CSS Internal (Semua styling di sini) -->
+    <style>
+        /* Reset dan Pengaturan Dasar */
+        :root {
+            /* Warna "Medok" yang cerah */
+            --warna-kuning: #FFC107; /* Kuning "medok" */
+            --warna-merah: #D93025;   /* Merah warung yang kuat */
+            --warna-hijau: #28A745;  /* Hijau cerah */
+            --warna-teks-utama: #212529; /* Hitam pekat untuk kontras */
+            --warna-teks-sekunder: #495057;
+            --warna-latar-konten: #FFFDF5; /* Putih gading / krem hangat */
+            --warna-putih: #ffffff;
+            --warna-border: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Font tebal untuk nuansa "medok" */
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--warna-teks-utama);
+            /* Gradasi latar belakang sesuai permintaan */
+            background-image: linear-gradient(145deg, 
+                var(--warna-kuning) 75%, 
+                var(--warna-merah) 90%, 
+                var(--warna-hijau) 100%
+            );
+            background-attachment: fixed;
+            line-height: 1.6;
+            padding: 0.5rem; /* Padding agar kontainer tidak menempel di hp */
+        }
+
+        /* Kontainer Utama - Dibuat "Medok" */
+        .app-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            background: var(--warna-latar-konten);
+            /* Border tebal dan bayangan kuat untuk efek "medok" */
+            border: 4px solid var(--warna-border);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 0 8px var(--warna-border);
+            overflow: hidden;
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Responsif untuk Mobile */
+        @media (max-width: 600px) {
+            body {
+                padding: 0.5rem;
+            }
+            .app-container {
+                margin: 0 auto;
+                border-width: 2px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 0 0 4px var(--warna-border);
+            }
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: var(--warna-putih); /* Latar putih agar header bersih */
+            border-bottom: 5px solid var(--warna-border);
+        }
+
+        header h1 {
+            /* Font Impact untuk kesan "medok" dan tebal */
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 3.5rem;
+            color: var(--warna-merah);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 0 var(--warna-kuning); /* Bayangan teks */
+        }
+
+        header .slogan {
+            font-size: 1.2rem;
+            color: var(--warna-teks-sekunder);
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* Konten Utama */
+        main, footer {
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            main, footer {
+                padding: 1rem;
+            }
+        }
+
+        /* Judul Bagian */
+        h2 {
+            font-family: Impact, sans-serif;
+            font-size: 2rem;
+            color: var(--warna-teks-utama);
+            border-bottom: 4px dashed var(--warna-kuning);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Bagian Menu */
+        .menu-item {
+            display: flex;
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: #fff;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.05);
+        }
+        
+        .menu-info {
+            flex-grow: 1;
+        }
+
+        .menu-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            color: var(--warna-teks-utama);
+        }
+
+        .menu-item .harga {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--warna-hijau);
+        }
+
+        /* Tombol "Medok" (3D) */
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--warna-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--warna-putih);
+            cursor: pointer;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            /* Efek 3D */
+            box-shadow: 0 5px 0 var(--warna-border);
+            transform: translateY(0);
+            transition: all 0.1s ease-out;
+        }
+        
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            /* Efek tertekan */
+            transform: translateY(5px);
+            box-shadow: 0 0 0 var(--warna-border);
+        }
+
+        .btn-tambah {
+            background-color: var(--warna-hijau);
+        }
+
+        .btn-pesan {
+            background-color: var(--warna-merah);
+            font-size: 1.25rem;
+            padding: 1rem;
+            width: 100%;
+        }
+        
+        .btn-pesan:disabled {
+            background-color: #aaa;
+            color: #eee;
+            box-shadow: 0 5px 0 #777;
+            cursor: not-allowed;
+        }
+
+        /* Bagian Keranjang */
+        #keranjang {
+            margin-top: 2.5rem;
+        }
+        
+        /* Wrapper untuk tabel agar responsif */
+        .table-wrapper {
+            overflow-x: auto; /* Scroll horizontal jika tabel terlalu lebar */
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .tabel-keranjang {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        .tabel-keranjang th, .tabel-keranjang td {
+            border: 1px solid #ddd;
+            padding: 0.85rem 1rem;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .tabel-keranjang th {
+            background-color: #f8f9fa;
+            font-weight: 700;
+        }
+        
+        /* Kolom Jumlah */
+        .tabel-keranjang td:nth-child(2) {
+            text-align: center;
+        }
+
+        /* Kolom Harga & Total */
+        .tabel-keranjang td:nth-child(3),
+        .tabel-keranjang td:nth-child(4) {
+            text-align: right;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        #total-container {
+            text-align: right;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 4px double var(--warna-border);
+        }
+
+        #total-container span {
+            color: var(--warna-merah);
+            font-size: 1.6rem;
+            margin-left: 1rem;
+        }
+        
+        /* Tampilan keranjang kosong */
+        #keranjang-kosong {
+            text-align: center;
+            color: var(--warna-teks-sekunder);
+            padding: 2rem;
+            border: 3px dashed #ddd;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        /* ------------------------------ */
+        /* Halaman Loading (Halaman 2) */
+        /* ------------------------------ */
+
+        #halaman-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+            min-height: 500px;
+        }
+
+        #status-pesanan {
+            font-family: Impact, sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            color: var(--warna-teks-utama);
+            text-align: center;
+        }
+
+        /* Kontainer untuk animasi */
+        .loading-visual {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animasi Mangkuk dan Asap (Opsional) */
+        .mangkok-animasi {
+            width: 120px;
+            height: 60px;
+            background: #f0f0f0;
+            border: 6px solid var(--warna-border);
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            position: absolute;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        /* Asap (Steam) */
+        .asap-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: -40px; /* Mulai asap di atas mangkuk */
+            filter: blur(3px);
+        }
+        
+        .asap-container span {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 10px;
+            height: 40px;
+            background: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            transform-origin: bottom center;
+            animation: asap-naik 5s infinite linear;
+        }
+
+        .asap-container span:nth-child(1) {
+            transform: translateX(-30px);
+            animation-delay: 0s;
+        }
+        .asap-container span:nth-child(2) {
+            transform: translateX(10px);
+            animation-delay: 1.5s;
+        }
+        .asap-container span:nth-child(3) {
+            transform: translateX(-10px);
+            animation-delay: 3s;
+        }
+
+        @keyframes asap-naik {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scaleY(1) translateX(-20px);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scaleY(2) translateX(20px);
+            }
+        }
+        
+        /* Spinner Loading Sederhana */
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 10px solid #f3f3f3;
+            border-top: 10px solid var(--warna-merah);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            z-index: 5; /* Di belakang mangkuk */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tombol Pesan Lagi */
+        #btn-pesan-lagi {
+            background-color: var(--warna-hijau);
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Kontainer utama aplikasi -->
+    <div class="app-container" id="app-container">
+
+        <!-- ========================== -->
+        <!-- HALAMAN 1: MENU & KERANJANG -->
+        <!-- ========================== -->
+        <div id="halaman-utama">
+            <header>
+                <h1>🍜 MIE TIP TOP</h1>
+                <p class="slogan">Lezat, Cepat, dan Bikin Nagih!</p>
+            </header>
+    
+            <main>
+                <!-- Bagian Menu -->
+                <section id="menu">
+                    <h2>Menu Andalan</h2>
+                    <div id="daftar-menu">
+                        <!-- Menu akan di-generate oleh JavaScript -->
+                    </div>
+                </section>
+    
+                <!-- Bagian Keranjang -->
+                <section id="keranjang">
+                    <h2>Keranjang Pesanan</h2>
+                    <div id="keranjang-konten">
+                        <p id="keranjang-kosong">Keranjang masih kosong, ayo pesan!</p>
+                        
+                        <div class="table-wrapper">
+                            <table class="tabel-keranjang hidden" id="tabel-keranjang">
+                                <thead>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="isi-keranjang">
+                                    <!-- Isi keranjang akan di-generate oleh JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="total-container" class="hidden">
+                            Total Keseluruhan:
+                            <span id="total-keseluruhan-harga">Rp 0</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+    
+            <footer>
+                <button class="btn btn-pesan" id="btn-pesan" disabled>
+                    Pesan Sekarang
+                </button>
+            </footer>
+        </div>
+
+        <!-- ========================== -->
+        <!-- HALAMAN 2: LOADING PESANAN -->
+        <!-- ========================== -->
+        <div id="halaman-loading" class="hidden">
+            
+            <div class="loading-visual">
+                <!-- Spinner Loading -->
+                <div class="spinner" id="spinner-loading"></div>
+                <!-- Animasi Mangkuk -->
+                <div class="mangkok-animasi" id="mangkok-animasi"></div>
+                <!-- Animasi Asap -->
+                <div class="asap-container" id="asap-animasi">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <h2 id="status-pesanan">Menghubungi Warung...</h2>
+
+            <button class="btn btn-pesan hidden" id="btn-pesan-lagi">
+                Pesan Lagi
+            </button>
+        </div>
+
+    </div> <!-- Akhir .app-container -->
+
+
+    <!-- JavaScript Internal (Semua logika di sini) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA MENU ---
+            const dataMenu = [
+                { id: 1, nama: 'Mie Ayam Original', harga: 15000 },
+                { id: 2, nama: 'Mie Ayam Bakso', harga: 18000 },
+                { id: 3, nama: 'Mie Ayam Pangsit', harga: 20000 },
+                { id: 4, nama: 'Mie Ayam Spesial Komplit', harga: 25000 },
+            ];
+
+            // --- STATE APLIKASI ---
+            let keranjang = {}; // Format: { 1: {...dataMenu[0], jumlah: 2}, 2: {...} }
+            let audioCtx;
+            let noiseSource;
+
+            // --- ELEMEN DOM ---
+            const daftarMenuEl = document.getElementById('daftar-menu');
+            const isiKeranjangEl = document.getElementById('isi-keranjang');
+            const totalKeseluruhanHargaEl = document.getElementById('total-keseluruhan-harga');
+            const btnPesanEl = document.getElementById('btn-pesan');
+            
+            const halamanUtamaEl = document.getElementById('halaman-utama');
+            const halamanLoadingEl = document.getElementById('halaman-loading');
+            const btnPesanLagiEl = document.getElementById('btn-pesan-lagi');
+            const statusPesananEl = document.getElementById('status-pesanan');
+            
+            const keranjangKosongEl = document.getElementById('keranjang-kosong');
+            const tabelKeranjangEl = document.getElementById('tabel-keranjang');
+            const totalContainerEl = document.getElementById('total-container');
+            
+            const spinnerEl = document.getElementById('spinner-loading');
+            const mangkokAnimasiEl = document.getElementById('mangkok-animasi');
+            const asapAnimasiEl = document.getElementById('asap-animasi');
+
+
+            // --- FUNGSI FORMAT RUPIAH ---
+            const formatRupiah = (angka) => {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(angka);
+            };
+
+            // --- FUNGSI RENDER MENU ---
+            const renderMenu = () => {
+                daftarMenuEl.innerHTML = ''; // Kosongkan dulu
+                dataMenu.forEach(item => {
+                    const menuItemHTML = `
+                        <div class="menu-item">
+                            <div class="menu-info">
+                                <h3>${item.nama}</h3>
+                                <p class="harga">${formatRupiah(item.harga)}</p>
+                            </div>
+                            <button class="btn btn-tambah" data-id="${item.id}">
+                                + Tambah
+                            </button>
+                        </div>
+                    `;
+                    daftarMenuEl.innerHTML += menuItemHTML;
+                });
+            };
+
+            // --- FUNGSI RENDER KERANJANG ---
+            const renderKeranjang = () => {
+                isiKeranjangEl.innerHTML = '';
+                let totalKeseluruhan = 0;
+                
+                const keysKeranjang = Object.keys(keranjang);
+
+                if (keysKeranjang.length === 0) {
+                    // Tampilkan pesan keranjang kosong
+                    keranjangKosongEl.classList.remove('hidden');
+                    tabelKeranjangEl.classList.add('hidden');
+                    totalContainerEl.classList.add('hidden');
+                    btnPesanEl.disabled = true;
+                    return;
+                }
+
+                // Sembunyikan pesan keranjang kosong
+                keranjangKosongEl.classList.add('hidden');
+                tabelKeranjangEl.classList.remove('hidden');
+                totalContainerEl.classList.remove('hidden');
+                btnPesanEl.disabled = false;
+
+                keysKeranjang.forEach(id => {
+                    const item = keranjang[id];
+                    const totalItem = item.harga * item.jumlah;
+                    totalKeseluruhan += totalItem;
+
+                    const barisKeranjangHTML = `
+                        <tr>
+                            <td>${item.nama}</td>
+                            <td>${item.jumlah}</td>
+                            <td>${formatRupiah(item.harga)}</td>
+                            <td>${formatRupiah(totalItem)}</td>
+                        </tr>
+                    `;
+                    isiKeranjangEl.innerHTML += barisKeranjangHTML;
+                });
+
+                totalKeseluruhanHargaEl.textContent = formatRupiah(totalKeseluruhan);
+            };
+
+            // --- FUNGSI TAMBAH KE KERANJANG ---
+            const tambahKeKeranjang = (id) => {
+                if (keranjang[id]) {
+                    // Jika sudah ada, tambah jumlahnya
+                    keranjang[id].jumlah++;
+                } else {
+                    // Jika belum ada, cari datanya dan tambahkan
+                    const itemMenu = dataMenu.find(item => item.id == id);
+                    keranjang[id] = { ...itemMenu, jumlah: 1 };
+                }
+                renderKeranjang();
+            };
+
+            // --- EVENT LISTENER UNTUK TOMBOL TAMBAH ---
+            daftarMenuEl.addEventListener('click', (e) => {
+                if (e.target && e.target.classList.contains('btn-tambah')) {
+                    const id = e.target.dataset.id;
+                    tambahKeKeranjang(id);
+                }
+            });
+
+
+            // --- LOGIKA HALAMAN LOADING (PESANAN) ---
+
+            // Web Audio API untuk Efek Suara (Tanpa File Eksternal)
+            const playFryingSound = () => {
+                if (audioCtx) {
+                    audioCtx.close().catch(console.error); // Tutup konteks sebelumnya jika ada
+                }
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Buat White Noise
+                const bufferSize = 2 * audioCtx.sampleRate;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                
+                noiseSource = audioCtx.createBufferSource();
+                noiseSource.buffer = buffer;
+                noiseSource.loop = true;
+                
+                // Filter (untuk membuatnya terdengar seperti desisan/gorengan)
+                const bandpass = audioCtx.createBiquadFilter();
+                bandpass.type = 'bandpass';
+                bandpass.frequency.setValueAtTime(1000, audioCtx.currentTime); // Frekuensi desisan
+                bandpass.Q.setValueAtTime(20, audioCtx.currentTime); 
+                
+                // Gain (Volume)
+                const gainNode = audioCtx.createGain();
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                // Fade in pelan
+                gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.5); // Volume rendah
+                
+                // Hubungkan semuanya
+                noiseSource.connect(bandpass);
+                bandpass.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                noiseSource.start();
+            };
+
+            const stopFryingSound = () => {
+                if (noiseSource) {
+                    noiseSource.stop();
+                }
+                if (audioCtx) {
+                    audioCtx.close().catch(console.error);
+                    audioCtx = null;
+                }
+            };
+
+            // --- FUNGSI SAAT TOMBOL "PESAN SEKARANG" DIKLIK ---
+            const mulaiPesanan = () => {
+                // Mainkan suara
+                playFryingSound();
+
+                // Sembunyikan halaman utama, tampilkan halaman loading
+                halamanUtamaEl.classList.add('hidden');
+                halamanLoadingEl.classList.remove('hidden');
+                
+                // Pastikan UI loading dalam keadaan awal
+                statusPesananEl.textContent = "Pesanan sedang dibuat... 🍜";
+                spinnerEl.classList.remove('hidden');
+                mangkokAnimasiEl.classList.remove('hidden');
+                asapAnimasiEl.classList.remove('hidden');
+                btnPesanLagiEl.classList.add('hidden');
+                
+                // Simulasi proses pembuatan pesanan
+                
+                // Tahap 2: Hampir Siap (setelah 3 detik)
+                setTimeout(() => {
+                    statusPesananEl.textContent = "Pesanan hampir siap... 🔥";
+                }, 3000);
+
+                // Tahap 3: Selesai (setelah 6 detik)
+                setTimeout(() => {
+                    statusPesananEl.textContent = "Pesanan selesai! 🍽️";
+                    
+                    // Hentikan suara dan animasi
+                    stopFryingSound();
+                    spinnerEl.classList.add('hidden');
+                    mangkokAnimasiEl.classList.add('hidden');
+                    asapAnimasiEl.classList.add('hidden');
+                    
+                    // Tampilkan tombol "Pesan Lagi"
+                    btnPesanLagiEl.classList.remove('hidden');
+                    
+                    // Ganti class tombol pesan lagi
+                    btnPesanLagiEl.className = "btn btn-pesan"; // Reset style
+                    btnPesanLagiEl.classList.add('btn-tambah'); // Jadi hijau
+
+                }, 6000);
+            };
+
+            // --- FUNGSI SAAT TOMBOL "PESAN LAGI" DIKLIK ---
+            const resetPesanan = () => {
+                // Sembunyikan halaman loading, tampilkan halaman utama
+                halamanLoadingEl.classList.add('hidden');
+                halamanUtamaEl.classList.remove('hidden');
+
+                // Reset keranjang
+                keranjang = {};
+                renderKeranjang();
+            };
+            
+            // --- ATUR EVENT LISTENER UTAMA ---
+            btnPesanEl.addEventListener('click', mulaiPesanan);
+            btnPesanLagiEl.addEventListener('click', resetPesanan);
+
+            // --- INISIALISASI APLIKASI ---
+            renderMenu();
+            renderKeranjang();
+        });
+    </script>
+
+</body>
+</html>
+
+
