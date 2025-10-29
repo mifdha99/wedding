@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIE TIP TOP</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(160deg, #f9d71c 80%, #e74c3c 10%, #2ecc71 10%);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      padding: 25px 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header img {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px;
+      background: white;
+      padding: 5px;
+    }
+
+    h1 {
+      color: #e74c3c;
+      font-size: 2em;
+      margin: 0;
+    }
+
+    p {
+      color: #2c3e50;
+      margin: 5px 0 15px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .item {
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+    }
+
+    .item h3 {
+      color: #e67e22;
+      margin: 10px 0;
+    }
+
+    .item p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #27ae60;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1e8449;
+    }
+
+    .cart {
+      margin: 20px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .cart h2 {
+      color: #e74c3c;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .total {
+      font-size: 18px;
+      text-align: right;
+      font-weight: bold;
+      color: #e67e22;
+    }
+
+    .order-btn {
+      background: #f39c12;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      display: block;
+      margin: 15px auto;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .order-btn:hover {
+      background: #d35400;
+    }
+
+    /* Halaman Loading */
+    .loading-page {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(160deg, #f9d71c 80%, #e74c3c 10%, #2ecc71 10%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .spinner {
+      width: 80px;
+      height: 80px;
+      border: 8px solid #fff;
+      border-top: 8px solid #e67e22;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 25px;
+      font-size: 22px;
+      color: #e74c3c;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #fff;
+    }
+
+    .reload-btn {
+      margin-top: 30px;
+      background: #27ae60;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    .reload-btn:hover {
+      background: #1e8449;
+    }
+  </style>
+</head>
+<body>
+  <header id="mainHeader">
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Mangkuk Mie Ayam" />
+    <h1>🍜 MIE TIP TOP</h1>
+    <p>Lezat, Cepat, dan Bikin Nagih!</p>
+  </header>
+
+  <section class="menu" id="menuSection">
+    <div class="item">
+      <h3>Mie Ayam Original</h3>
+      <p>Rp 15.000</p>
+      <button onclick="addToCart('Mie Ayam Original', 15000)">Tambah</button>
+    </div>
+    <div class="item">
+      <h3>Mie Ayam Bakso</h3>
+      <p>Rp 18.000</p>
+      <button onclick="addToCart('Mie Ayam Bakso', 18000)">Tambah</button>
+    </div>
+    <div class="item">
+      <h3>Mie Ayam Pangsit</h3>
+      <p>Rp 20.000</p>
+      <button onclick="addToCart('Mie Ayam Pangsit', 20000)">Tambah</button>
+    </div>
+    <div class="item">
+      <h3>Mie Ayam Spesial Komplit</h3>
+      <p>Rp 25.000</p>
+      <button onclick="addToCart('Mie Ayam Spesial Komplit', 25000)">Tambah</button>
+    </div>
+  </section>
+
+  <section class="cart" id="cartSection">
+    <h2>🧾 Pesanan Kamu</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Menu</th>
+          <th>Jumlah</th>
+          <th>Harga</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="total">Total: Rp <span id="totalPrice">0</span></p>
+    <button class="order-btn" onclick="goToLoading()">🛒 Pesan Sekarang</button>
+  </section>
+
+  <!-- Halaman "Pesanan Sedang Dibuat" -->
+  <div class="loading-page" id="loadingPage">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Pesanan sedang dibuat... 🍜</div>
+    <button class="reload-btn" id="reloadBtn" onclick="reloadPage()">Pesan Lagi</button>
+    <audio id="frySound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b99a6b3b7.mp3?filename=frying-pan-1-7065.mp3"></audio>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) existing.qty++;
+      else cart.push({ name, price, qty: 1 });
+      renderCart();
+    }
+
+    function renderCart() {
+      const tbody = document.querySelector("#cartTable tbody");
+      tbody.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        const row = document.createElement("tr");
+        const subTotal = item.price * item.qty;
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.qty}</td>
+          <td>Rp ${item.price.toLocaleString()}</td>
+          <td>Rp ${subTotal.toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
+        total += subTotal;
+      });
+      document.getElementById("totalPrice").textContent = total.toLocaleString();
+    }
+
+    function goToLoading() {
+      if (cart.length === 0) return alert("Belum ada pesanan!");
+      document.getElementById("mainHeader").style.display = "none";
+      document.getElementById("menuSection").style.display = "none";
+      document.getElementById("cartSection").style.display = "none";
+      document.getElementById("loadingPage").style.display = "flex";
+
+      const sound = document.getElementById("frySound");
+      sound.play();
+
+      setTimeout(() => {
+        document.getElementById("loadingText").textContent = "Pesanan hampir siap... 🔥";
+      }, 2500);
+
+      setTimeout(() => {
+        sound.pause();
+        sound.currentTime = 0;
+        document.getElementById("loadingText").textContent = "Pesanan Selesai! 🍽️";
+        document.getElementById("reloadBtn").style.display = "inline-block";
+      }, 5000);
+    }
+
+    function reloadPage() {
+      location.reload();
+    }
+  </script>
+</body>
+  </html>
