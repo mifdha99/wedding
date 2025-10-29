@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Warung Nasi Goreng Jarvis</title>
   <style>
     body {
@@ -76,13 +76,46 @@
       text-align: right;
       font-weight: bold;
     }
-    .print-btn {
+    .order-btn {
       background: #27ae60;
       padding: 12px 20px;
       border-radius: 10px;
     }
-    .print-btn:hover {
+    .order-btn:hover {
       background: #1e8449;
+    }
+
+    /* Halaman Loading */
+    .loading-page {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #ddd;
+      border-top: 6px solid #e67e22;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #e67e22;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -134,8 +167,14 @@
       <tbody></tbody>
     </table>
     <p class="total">Total: Rp <span id="totalPrice">0</span></p>
-    <button class="print-btn" onclick="printBill()">🖨️ Cetak Bill</button>
+    <button class="order-btn" onclick="prosesPesanan()">🛒 Pesan Sekarang</button>
   </section>
+
+  <!-- Halaman Loading -->
+  <div class="loading-page" id="loadingPage">
+    <div class="spinner"></div>
+    <div class="loading-text">Pesanan sedang dibuat... 🍳</div>
+  </div>
 
   <script>
     let cart = [];
@@ -171,6 +210,19 @@
       document.getElementById("totalPrice").textContent = total.toLocaleString();
     }
 
+    function prosesPesanan() {
+      if (cart.length === 0) {
+        alert("Belum ada pesanan!");
+        return;
+      }
+      document.getElementById("loadingPage").style.display = "flex";
+
+      setTimeout(() => {
+        document.getElementById("loadingPage").style.display = "none";
+        printBill();
+      }, 3000);
+    }
+
     function printBill() {
       let billWindow = window.open("", "Bill", "width=400,height=600");
       billWindow.document.write("<h2>🧾 Struk Pembelian</h2>");
@@ -193,10 +245,10 @@
       billWindow.document.write("</table>");
       billWindow.document.write("<hr>");
       billWindow.document.write(`<h3>Total Akhir: Rp ${total.toLocaleString()}</h3>`);
-      billWindow.document.write("<p>Terima kasih telah membeli di Warung Nasi Goreng Jarvis 🍳</p>");
+      billWindow.document.write("<p>Terima kasih telah memesan di Warung Nasi Goreng Jarvis 🍳</p>");
       billWindow.print();
       billWindow.close();
     }
   </script>
 </body>
-  </html>
+</html>
